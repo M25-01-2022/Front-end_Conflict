@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 
 export const useConflictsStore = defineStore("conflicts", () => {
-    const API_URL = "http://localhost:8080/customers"
+    const API_URL = "http://localhost:8080/api/v1/conflicts"
 
     const conflicts = ref([]);
     const loading = ref(false);
@@ -27,7 +27,7 @@ export const useConflictsStore = defineStore("conflicts", () => {
     const getConflictById = async (id) => {
         loading.value = true;
         try {
-            const response = await fetch('${API_URL/${id}}');
+            const response = await fetch(`${API_URL}/${id}`);
             const data = await response.json();
             error.value = false;
             return data;
@@ -39,16 +39,34 @@ export const useConflictsStore = defineStore("conflicts", () => {
     }
 
     const addConflict = async (newConflict) => {
-        const response = await fetch(API_URL, {
+        try {
+            const response = await fetch(API_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newConflict)
         });
-        if (response.ok) {
-            const data = await response.json();
-            conflicts.value.push(data);
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error("Error al agregar conflicto:", errorText);
+            return;
+        }
+        const data = await response.json();
+        console.log("Conflicto agregado:", data);
+
+        conflicts.value.push(data);
+        } catch (e) {
+                console.error("Error al conectar con API:", e);
+        }
+    }
+
+    const deleteConflict = async (id) => {
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {method: 'DELETE'});
+            if (response.ok) {
+                conflicts.value = conflicts.value.filter(c => c.id !== id);
+            }
+        } catch (e) {
+            console.error("Error al eliminar conflicto:", e);
         }
     }
 
@@ -58,7 +76,8 @@ export const useConflictsStore = defineStore("conflicts", () => {
         error,
         getConflicts,
         getConflictById,
-        addConflict
+        addConflict,
+        deleteConflict
     }
 },{
     persist: true

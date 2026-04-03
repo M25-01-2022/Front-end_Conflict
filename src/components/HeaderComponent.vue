@@ -27,7 +27,7 @@
     padding: 25px;
     text-align: center;
     .title{
-        margin: 0;
+        padding-bottom: 10px;
         font-family: 'Times New Roman', Times, serif;
         font-weight: bold;
     }

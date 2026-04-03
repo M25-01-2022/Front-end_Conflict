@@ -36,7 +36,7 @@ import HeaderComponent from '../components/HeaderComponent.vue';
                 </p>
             </div>
             <div class="footer">
-                <p>Desarrollado para pruebas de integración Full Stack</p>
+                <p>Desarrollado para pruebas de integración Full-Stack</p>
             </div>
         </div>
     </div>
@@ -50,6 +50,8 @@ import HeaderComponent from '../components/HeaderComponent.vue';
     align-items: center;
     background: #1e1e2f;
     color: white;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
 }
 
 .card {
