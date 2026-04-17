@@ -26,6 +26,7 @@ onMounted(async() => {
         <h2 v-if="conflictStore.loading">Cargando...</h2>
         <h2 v-else-if="conflictStore.error">Algo ha salido mal, prueba en otro momento</h2>
         <ul v-else class="conflict-list">
+            <ConflictForm/>
             <h3>Conflictos activos: {{ activeConflicts.length }}</h3>
             <li v-for="conflict in conflictStore.conflicts" :key="conflict.id">
                 <ConflictCard
