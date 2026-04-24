@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 
 export const useConflictsStore = defineStore("conflicts", () => {
-    const API_URL = "http://localhost:8080/api/v1/conflicts"
+    const API_URL = "fullstack-tasca-conflict-production.up.railway.app"
 
     const conflicts = ref([]);
     const loading = ref(false);
@@ -12,9 +12,9 @@ export const useConflictsStore = defineStore("conflicts", () => {
     const getConflicts = async () => {
         loading.value = true;
         try {
-            const response = await fetch(API_URL)
+            const response = await fetch(`${API_URL}/api/v1/conflicts`);
             const data = await response.json();
-            conflicts.value = data;
+            conflicts.value = Array.isArray(data) ? data : [];
             error.value = false;
         } catch (e) {
             error.value = true;
@@ -27,7 +27,7 @@ export const useConflictsStore = defineStore("conflicts", () => {
     const getConflictById = async (id) => {
         loading.value = true;
         try {
-            const response = await fetch(`${API_URL}/${id}`);
+            const response = await fetch(`${API_URL}/api/v1/conflicts/${id}`);
             const data = await response.json();
             error.value = false;
             return data;

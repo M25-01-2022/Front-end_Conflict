@@ -29,8 +29,8 @@ const getStatusClass = (status) => {
     <template #header>
         <div class="conflict-card-header">
             <div class="avatar">
-                <h3>{{ conflict.name.charAt(0).toUpperCase() }}</h3>
-                <h3>{{ conflict.name.charAt(1).toUpperCase() }}</h3>
+                <h3>{{ conflict.name.charAt(0)?.toUpperCase() ?? '?'}}</h3>
+                <h3>{{ conflict.name.charAt(1)?.toUpperCase() ?? ''}}</h3>
             </div>
             <div class="header-info">
                 <h3>{{ conflict.name }}</h3>
