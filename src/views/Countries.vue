@@ -6,7 +6,7 @@ const countries = ref([]);
 const loading = ref(false);
 const error = ref(false);
 
-const API_URL = "import.meta.env.VITE_API_URL";
+const API_URL = "https://fullstack-tasca-conflict-production-198b.up.railway.app";
 
 const fetchCountries = async () => {
     loading.value = true;
