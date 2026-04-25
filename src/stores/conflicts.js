@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 
 export const useConflictsStore = defineStore("conflicts", () => {
-    const API_URL = "https://fullstack-tasca-conflict-production-198b.up.railway.app"
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const conflicts = ref([]);
     const loading = ref(false);
@@ -13,6 +13,12 @@ export const useConflictsStore = defineStore("conflicts", () => {
         loading.value = true;
         try {
             const response = await fetch(`${API_URL}/api/v1/conflicts`);
+            if (!response.ok) {
+                console.error("API error:", response.status);
+                conflicts.value = [];
+                error.value = true;
+                return;
+            }
             const data = await response.json();
             conflicts.value = Array.isArray(data) ? data : [];
             error.value = false;
