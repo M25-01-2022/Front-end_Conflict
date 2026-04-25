@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useCountriesStore = defineStore('countries', () => {
-    const API_URL = 'fullstack-tasca-conflict-production.up.railway.app';
+    const API_URL = 'https://fullstack-tasca-conflict-production-198b.up.railway.app';
     const countries = ref([]);
     const loading = ref(false);
 

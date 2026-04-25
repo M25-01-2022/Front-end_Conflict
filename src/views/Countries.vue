@@ -6,12 +6,12 @@ const countries = ref([]);
 const loading = ref(false);
 const error = ref(false);
 
-const API_URL = "http://localhost:8080/api/v1/countries";
+const API_URL = "https://fullstack-tasca-conflict-production-198b.up.railway.app";
 
 const fetchCountries = async () => {
     loading.value = true;
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(`${API_URL}/api/v1/countries`);
         const data = await response.json();
         countries.value = data;
         error.value = false;

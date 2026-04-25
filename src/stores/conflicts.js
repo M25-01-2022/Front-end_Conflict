@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 
 export const useConflictsStore = defineStore("conflicts", () => {
-    const API_URL = "fullstack-tasca-conflict-production.up.railway.app"
+    const API_URL = "https://fullstack-tasca-conflict-production-198b.up.railway.app"
 
     const conflicts = ref([]);
     const loading = ref(false);
@@ -40,7 +40,7 @@ export const useConflictsStore = defineStore("conflicts", () => {
 
     const addConflict = async (newConflict) => {
         try {
-            const response = await fetch(API_URL, {
+            const response = await fetch(`${API_URL}/api/v1/conflicts`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newConflict)
@@ -61,7 +61,7 @@ export const useConflictsStore = defineStore("conflicts", () => {
 
     const deleteConflict = async (id) => {
         try {
-            const response = await fetch(`${API_URL}/${id}`, {method: 'DELETE'});
+            const response = await fetch(`${API_URL}/api/v1/conflicts/${id}`, {method: 'DELETE'});
             if (response.ok) {
                 conflicts.value = conflicts.value.filter(c => c.id !== id);
             }
